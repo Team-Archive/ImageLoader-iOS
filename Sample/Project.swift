@@ -1,0 +1,16 @@
+import ProjectDescription
+import ProjectDescriptionHelpers
+import MyPlugin
+
+// MARK: - Project
+
+let project = Project.app(
+  name: "Sample",
+  destinations: .iOS,
+  dependencies: [
+    .kingfisher
+  ],
+  additionalTargets: [],
+  additionalSourcePaths: ["../Sources/**"],
+  additionalResourcePaths: []
+)
