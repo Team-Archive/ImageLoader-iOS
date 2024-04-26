@@ -16,11 +16,15 @@ public struct ArchiveImage: View {
   private var capInsets: EdgeInsets = EdgeInsets()
   private var resizingMode: Image.ResizingMode = .stretch
   private var renderingMode: Image.TemplateRenderingMode?
+  private var onSuccess: (() -> Void)?
   
   public var body: some View {
     KFImage(self.imageUrl)
       .resizable(capInsets: capInsets, resizingMode: resizingMode)
       .renderingMode(renderingMode)
+      .onSuccess { result in
+        self.onSuccess?()
+      }
   }
   
   public init(_ url: URL?) {
@@ -43,6 +47,12 @@ extension ArchiveImage {
   public func renderingMode(_ renderingMode: Image.TemplateRenderingMode?) -> ArchiveImage {
     var newImage = self
     newImage.renderingMode = renderingMode
+    return newImage
+  }
+  
+  public func onSuccess(_ handler: @escaping () -> Void) -> ArchiveImage {
+    var newImage = self
+    newImage.onSuccess = handler
     return newImage
   }
 }
